@@ -2,6 +2,5 @@ c:\users\tomt\documents\visual studio 2015\Projects\ChatServer\ChatServer\bin\De
 C:\Users\Tomt\Documents\GitHub\ChatApplication\ChatServer\ChatServer\bin\Debug\ChatServer.exe.config
 C:\Users\Tomt\Documents\GitHub\ChatApplication\ChatServer\ChatServer\bin\Debug\ChatServer.exe
 C:\Users\Tomt\Documents\GitHub\ChatApplication\ChatServer\ChatServer\bin\Debug\ChatServer.pdb
-C:\Users\Tomt\Documents\GitHub\ChatApplication\ChatServer\ChatServer\obj\Debug\ChatServer.csprojResolveAssemblyReference.cache
 C:\Users\Tomt\Documents\GitHub\ChatApplication\ChatServer\ChatServer\obj\Debug\ChatServer.exe
 C:\Users\Tomt\Documents\GitHub\ChatApplication\ChatServer\ChatServer\obj\Debug\ChatServer.pdb

@@ -20,14 +20,15 @@ namespace ChatServer
             int counter = 0;
 
             serverSocket.Start();
-            Console.WriteLine("Serveris running and listening on port: " + serverSocket.LocalEndpoint.ToString());
+            Console.WriteLine("Server is running and listening on: " + localAddr+":8888");
             counter = 0;
+
             while (true)
             {
                 counter++;
                 clientSocket = serverSocket.AcceptTcpClient();
 
-                byte[] bytesFrom = new byte[10025];
+                byte[] bytesFrom = new byte[70000];
                 string dataFromClient = null;
 
                 NetworkStream networkStream = clientSocket.GetStream();
@@ -54,7 +55,7 @@ namespace ChatServer
             {
                 TcpClient broadcastSocket = (TcpClient)item.Value;
                 NetworkStream broadcastStream = broadcastSocket.GetStream();
-                byte[] broadcastBytes = null;
+                Byte[] broadcastBytes = null;
 
                 if (flag)
                 {

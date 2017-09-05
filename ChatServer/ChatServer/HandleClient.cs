@@ -28,7 +28,7 @@ namespace ChatServer
         {          
             byte[] bytesFrom = new byte[10025];
             string dataFromClient = null;
-            byte[] sendBytes = null;
+            Byte[] sendBytes = null;
             string count = null;
             string serverResponse = null;
             int requestCount = 0;
