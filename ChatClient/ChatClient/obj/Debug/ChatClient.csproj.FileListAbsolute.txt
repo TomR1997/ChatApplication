@@ -1,0 +1,1 @@
+C:\Users\Tomt\Documents\GitHub\ChatApplication\ChatClient\ChatClient\bin\Debug\ChatClient.exe.config

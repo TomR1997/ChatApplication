@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Collections;
+using System.Net;
 
 namespace ChatServer
 {
@@ -13,7 +14,8 @@ namespace ChatServer
         public static Hashtable clientsList = new Hashtable();
         static void Main(string[] args)
         {
-            TcpListener serverSocket = new TcpListener(8888);
+            IPAddress localAddr = IPAddress.Parse("127.0.0.1");
+            TcpListener serverSocket = new TcpListener(localAddr,8888);
             TcpClient clientSocket = default(TcpClient);
             int counter = 0;
 
