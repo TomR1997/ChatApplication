@@ -1,1 +1,2 @@
 c:\users\tomt\documents\visual studio 2015\Projects\ChatServer\ChatServer\bin\Debug\ChatServer.exe.config
+C:\Users\Tomt\Documents\GitHub\ChatApplication\ChatServer\ChatServer\bin\Debug\ChatServer.exe.config
