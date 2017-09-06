@@ -1,65 +1,66 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Net.Sockets;
+using System.Text;
 using System.Collections;
 using System.Net;
 
 namespace ChatServer
 {
-    public class Program
+    class Program
     {
         public static Hashtable clientsList = new Hashtable();
         static void Main(string[] args)
         {
-            IPAddress localAddr = IPAddress.Parse("127.0.0.1");
-            TcpListener serverSocket = new TcpListener(localAddr,8888);
+            IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
+            int port = 8888;
+            TcpListener serverSocket = new TcpListener(ipAddress,port);
             TcpClient clientSocket = default(TcpClient);
             int counter = 0;
 
             serverSocket.Start();
-            Console.WriteLine("Server is running and listening on: " + localAddr+":8888");
+            Console.WriteLine("Server is running, listening on: "+ipAddress+":"+port);
             counter = 0;
-
-            while (true)
+            while ((true))
             {
-                counter++;
+                counter ++;
                 clientSocket = serverSocket.AcceptTcpClient();
 
-                byte[] bytesFrom = new byte[70000];
+                byte[] bytesFrom = new byte[1024];
                 string dataFromClient = null;
 
                 NetworkStream networkStream = clientSocket.GetStream();
-                networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
-                dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
+                networkStream.Read(bytesFrom, 0, bytesFrom.Length);
+                dataFromClient = Encoding.ASCII.GetString(bytesFrom);
                 dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
 
                 clientsList.Add(dataFromClient, clientSocket);
-                Broadcast(dataFromClient + " joined chat room",dataFromClient,false);
+
+                Broadcast(dataFromClient + " joined ", dataFromClient, false);
+
+                Console.WriteLine(dataFromClient + " joined chat room ");              
                 HandleClient client = new HandleClient();
-
                 client.StartClient(clientSocket, dataFromClient, clientsList);
-
-                clientSocket.Close();
-                serverSocket.Stop();
-                Console.WriteLine("Exit");
-                Console.ReadLine();
             }
+
+            clientSocket.Close();
+            serverSocket.Stop();
+            Console.WriteLine("exit");
+            Console.ReadLine();
         }
 
         public static void Broadcast(string message, string userName, bool flag)
         {
-            foreach(DictionaryEntry item in clientsList)
+            foreach (DictionaryEntry Item in clientsList)
             {
-                TcpClient broadcastSocket = (TcpClient)item.Value;
+                TcpClient broadcastSocket;
+                broadcastSocket = (TcpClient)Item.Value;
                 NetworkStream broadcastStream = broadcastSocket.GetStream();
-                Byte[] broadcastBytes = null;
+                byte[] broadcastBytes = null;
 
-                if (flag)
+                if (flag == true)
                 {
-                    broadcastBytes = Encoding.ASCII.GetBytes(userName + ": " + message);
+                    broadcastBytes = Encoding.ASCII.GetBytes(userName + " says: " + message);
                 }
                 else
                 {
